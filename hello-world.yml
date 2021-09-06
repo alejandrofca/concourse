@@ -7,6 +7,8 @@ resources:
 jobs:
 - name: hello-world-job
   plan:
+  - get: repo
+    trigger: true
   - task: hello-world-task
     config:
       platform: linux
@@ -14,7 +16,6 @@ jobs:
         type: registry-image
         source:
           repository: busybox
-      outputs:
-      - name: the-artifact
       run:
-        artifacts
+        path: echo
+        args: ["Hello World!"]
