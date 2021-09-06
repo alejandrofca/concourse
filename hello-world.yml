@@ -1,7 +1,8 @@
 resources:
 - name: repo
   type: git
-  source: git remote add origin https://github.com/alejandrofca/concourse.git
+  source:
+    uri: https://github.com/alejandrofca/concourse.git
 
 jobs:
 - name: hello-world-job
