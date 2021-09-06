@@ -1,3 +1,8 @@
+resources:
+- name: repo
+  type: git
+  source: git remote add origin https://github.com/alejandrofca/concourse.git
+
 jobs:
 - name: hello-world-job
   plan:
@@ -11,26 +16,4 @@ jobs:
       outputs:
       - name: the-artifact
       run:
-        path: sh
-        args: 
-        - -cx
-        - |
-          ls -l .
-          echo "hello from hello-world-task" > the-artifact/message
-          ls -l the-artifact/message
-  - task: read-the-artifact
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source:
-          repository: busybox
-      inputs:
-      - name: the-artifact
-      run:
-        path: sh
-        args: 
-        - -cx
-        - |
-          ls -l .
-          cat the-artifact/message
+        artifacts
