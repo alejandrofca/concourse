@@ -19,3 +19,6 @@ jobs:
       run:
         path: echo
         args: ["Hello World, I'm alive!!!!!!!!! :D"]
+      run:
+        path: ls
+        args: ["-lF repo"]
