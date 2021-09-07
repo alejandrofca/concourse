@@ -3,7 +3,6 @@ resources:
   type: git
   source:
     uri: https://github.com/alejandrofca/concourse.git
-
 jobs:
 - name: hello-world-job
   plan:
@@ -16,9 +15,13 @@ jobs:
         type: registry-image
         source:
           repository: busybox
+      inputs: # add the get step as an input to this task
+      - name: repo
       run:
-        path: echo
-        args: ["Hello World, I'm alive!!!!!!!!! :D"]
-      run:
-        path: ls
-        args: ["-lF repo"]
+        path: sh
+        args:
+        - -cx
+        - |
+          cat repo/docker-compose.yml > inputed.txt
+          ls -l .
+          cat inputed.txt
