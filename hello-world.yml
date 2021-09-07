@@ -18,5 +18,4 @@ jobs:
           repository: busybox
       run:
         path: echo
-        args: ["Hello World again!!!!!!!!!!!! :D"]
-        args: ["I'm alive"]
+        args: ["Hello World, I'm alive!!!!!!!!!!!! :D"]
