@@ -18,5 +18,37 @@ jobs:
           repository: busybox
       run:
         path: echo
-        args: ["Hello World again!!!!!!!! :D"]
-        args: ["I'm alive!"]
+        args: ["Hello World again!!!!!!!!!!!! :D"]
+        args: ["I'm alive"]
+  - task: save-greeting-task
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      outputs:
+      - name: artifacts
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          echo "Hello darling!" > artifacts/greeting
+          ls -l artifacts/greeting
+  - task: say-greeting
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      inputs:
+      - name: artifacts
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          ls -l artifacts
+          cat artifacts/greeting
