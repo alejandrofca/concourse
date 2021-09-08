@@ -3,6 +3,8 @@ resources:
   type: git
   source:
     uri: https://alejandrofca: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@github.com/alejandrofca/concourse.git
+    username: alejandrofca
+    password: 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
 jobs:
 - name: create-commit
   plan:
