@@ -1,0 +1,38 @@
+resources:
+- name: repo
+  type: git
+  source:
+    uri: https://alejandrofca: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@github.com/alejandrofca/concourse.git
+jobs:
+- name: create-commit
+  plan:
+  - get: repo
+    trigger: true
+  - task: create-commit-task1
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: gitea/gitea
+      inputs:
+      - name: repo
+      outputs:
+      - name: repo
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          cd repo
+          git config --local user.email "alejandro.fca@gmail.com"
+          git config --local user.name "Alejandro Ramirez"
+          date +%Y-%m-%d > todays-date
+          git add ./todays-date
+          git commit -m "Update todays date"
+          cat ./todays-date
+
+  - put: repo
+    params:
+      repository: repo
+      branch: main
