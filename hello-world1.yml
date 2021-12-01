@@ -1,0 +1,27 @@
+resources:
+- name: repo
+  type: git
+  source:
+    uri: https://github.com/alejandrofca/concourse.git
+jobs:
+- name: hello-world-job
+  plan:
+  - get: repo
+    trigger: true   # tell Concourse to trigger this job when new versions are emitted
+  - task: hello-world-task
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      inputs: # add the get step as an input to this task
+      - name: repo
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          cat repo/docker-compose.yml > inputed.txt
+          ls -l .
+          cat inputed.txt
