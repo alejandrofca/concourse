@@ -5,10 +5,31 @@ jobs:
     config:
       platform: linux
       image_resource:
-        name: linux
         type: registry-image
         source:
           repository: busybox
+      outputs:
+      - name: the-artifact
       run:
-        path: echo
-        args: ["¡Hola mundo!", "¡Estoy vivo!"]
+        path: sh
+        args:
+        - -cx
+        - |
+          ls -l .
+          echo "hello from another step!" > the-artifact/message
+  - task: read-the-artifact
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      inputs:
+      - name: the-artifact
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          ls -l .
+          cat the-artifact/message
