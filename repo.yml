@@ -6,6 +6,7 @@ resources:
     uri: https://github.com/alejandrofca/concourse.git
     branch: main
     username: 
+    password: 
 
 jobs:
 - name: repo-job
