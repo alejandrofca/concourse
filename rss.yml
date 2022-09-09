@@ -1,0 +1,20 @@
+resource_types:
+# declare the new resource type
+- name: rss
+  type: registry-image
+  source:
+    repository: suhlig/concourse-rss-resource
+    tag: latest
+
+resources:
+# use the resource as usual
+- name: dino-feed
+  type: rss
+  source:
+    url: https://www.qwantz.com/rssfeed.php
+
+jobs:
+- name: announce
+  plan:
+  - get: dino-feed
+    trigger: true

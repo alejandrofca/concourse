@@ -11,6 +11,7 @@ jobs:
       outputs:
       - name: the-artifact
       run:
+        # This is a neat way of embedding a script into a task
         path: sh
         args:
         - -cx
