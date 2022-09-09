@@ -5,8 +5,7 @@ resources:
   source:
     uri: https://github.com/alejandrofca/concourse.git
     branch: main
-    username: alejandrofca
-    password: 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
+    username: 
 
 jobs:
 - name: repo-job
