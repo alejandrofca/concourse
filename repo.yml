@@ -50,8 +50,8 @@ jobs:
         - -cx
         - |
           cd repo-in
-          date > todays-date
-          git add ./todays-date
+          date > timestamp
+          git add ./timestamp
           git config --global user.email $EMAIL
           git config --global user.name $GIT_AUTHOR_NAME
           git commit -m "Update todays date"
