@@ -5,14 +5,31 @@ resources:
   source:
     uri: https://github.com/alejandrofca/concourse.git
     branch: main
-    username: 
-    password: 
+    username: alejandrofca
+    password: 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
 
 jobs:
 - name: repo-job
   plan:
   - get: repo-in
     trigger: true
+  - task: git-status
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: gitea/gitea
+      inputs:
+      - name: repo-in
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          cd repo-in
+          git branch
+          git status
   - task: create-commit
     config:
       platform: linux
