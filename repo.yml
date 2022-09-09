@@ -54,7 +54,7 @@ jobs:
           git add ./timestamp
           git config --global user.email $EMAIL
           git config --global user.name $GIT_AUTHOR_NAME
-          git commit -m "Update todays date"
+          git commit -m "Update timestamp"
   - put: repo-in
     params:
       repository: repo-in
